@@ -2,6 +2,7 @@
 
 const cron = require("node-cron");
 const axios = require("axios");
+const crypto = require("crypto")
 
 function init () {
     const logger = {};
@@ -18,7 +19,7 @@ function init () {
      * Nightscout API
      */
     const NIGHTSCOUT_URL = process.env.SP__NIGHTSCOUT_URL;
-    const NIGHTSCOUT_API_TOKEN = process.env.SP__NIGHTSCOUT_API_TOKEN;
+    const NIGHTSCOUT_API_TOKEN = crypto.createHash('sha1').update(process.env.API_SECRET).digest('hex');;
 
     const NIGHTSCOUT_TREND_ARROWS = {
         tripleUp: 'TripleUp',
@@ -186,7 +187,7 @@ function init () {
     
             logger.info("Upload of " + formattedMeasurements.length + " measurements to Nightscout successfull");
         } catch (error) {
-            logger.error("Upload to Nightscout failed");
+            logger.error("Upload to Nightscout failed: " + JSON.stringify(error.message));
             deleteToken();
         }
     }
