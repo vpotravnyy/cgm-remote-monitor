@@ -83,7 +83,6 @@
     "braces": "^3.0.2",
     "buffer": "^6.0.3",
     "compression": "^1.7.4",
-    "crypto": "^1.0.1",
     "crypto-browserify": "^3.12.0",
     "css-loader": "^5.0.1",
     "cssmin": "^0.4.3",
